@@ -1,22 +1,24 @@
 import { useState } from 'react';
+import BlogList from "./BlogList";
 
 
 const Home = () => {
-	// let name = 'Zikri';
+	const [blogs, setBlogs] = useState([
+		{ title: 'hello world', body: 'Test', author: 'azizikri', id: 1 },
+		{ title: 'hello world1', body: 'Test', author: 'azizikri', id: 2 },
+		{ title: 'hello world2', body: 'Test', author: 'azizikri', id: 3 },
+		{ title: 'hello world3', body: 'Test', author: 'bruh', id: 4 },
+	]);
 
-	const [name, setName] = useState('Zikri');
-	let [age, setAge] = useState(18);
- 	const handleClick = (e) => {	
-		setName('Bipo');
-		setAge(++age);
-		console.log(e);
-	};
+	const handleDelete = (id) => {
+		const newBlog = blogs.filter(blog => blog.id !== id);
+		setBlogs(newBlog);
+	}
 
 	return (
 		<div className='home'>
-			<h2>Homepage</h2>
-			<p>{name} is {age} years old!</p>
-			<button onClick={handleClick}>Click Me!</button>
+			<BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete}/>
+			{/* <BlogList blogs={blogs.filter((blog) => blog.author === 'azizikri')} title="azizikri's Blogs" /> */}
 		</div>
 	);
 };
